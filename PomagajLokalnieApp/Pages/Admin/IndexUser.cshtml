@@ -1,0 +1,28 @@
+﻿@page
+@model IndexUser
+
+<a class="btn btn-secondary" asp-page="CreateUser">Dodaj nowego użytkownika</a>
+<table class="table table-striped table-bordered">
+    <thead>
+    <th>Login</th>
+    <th>Password</th>
+    <th>Role</th>
+    <th>Operations</th>
+    </thead>
+    
+    <tbody>
+    @foreach (var item in Model.UserCollection)
+    {
+        <tr>
+            <td>@item.Login</td>
+            <td>@item.Password</td>
+            <td>@item.Roles</td>
+            <form asp-page-handler="delete" asp-route-id="@item.Id">
+                <td>
+                    <button class="btn btn-danger">Delete</button>
+                </td>
+            </form>
+        </tr>
+    }
+    </tbody>
+</table>

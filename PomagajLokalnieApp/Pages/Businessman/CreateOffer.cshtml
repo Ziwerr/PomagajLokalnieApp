@@ -1,0 +1,23 @@
+﻿@page
+@model CreateOffer
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="CreateOfferViewModel.Name"></label>
+        <input class="form-control" asp-for="CreateOfferViewModel.Name">
+    </div>
+    <div class="form-group">
+        <label asp-for="CreateOfferViewModel.Description"></label>
+        <input class="form-control" asp-for="CreateOfferViewModel.Description">
+    </div>
+    <div class="form-group">
+        <label asp-for="CreateOfferViewModel.OfferTypeName"></label>
+        <select asp-items="Model.Options" asp-for="CreateOfferViewModel.OfferTypeId"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="CreateOfferViewModel.Price"></label>
+        <input class="form-control" asp-for="CreateOfferViewModel.Price">
+    </div>
+    
+    <button class="btn btn-primary">Utwórz</button>
+</form>

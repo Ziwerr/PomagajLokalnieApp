@@ -1,0 +1,30 @@
+﻿@page
+@model IndexCompany
+
+<a class="btn btn-secondary" asp-page="CreateCompany">Dodaj firmę</a>
+<table class="table table-striped table-bordered">
+    <thead>
+    <th>Name</th>
+    <th>NIP</th>
+    <th>Bank Account</th>
+    <th>Delete</th>
+    <th>Operations</th>
+    </thead>
+    
+    <tbody>
+    @foreach (var item in Model.CompanyCollection)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.NIP</td>
+            <td>@item.BankAccount</td>
+            <td>@item.SoftDelete</td>
+            <form asp-page-handler="delete" asp-route-id="@item.Id">
+                <td>
+                    <button class="btn btn-danger">Delete</button>
+                </td>
+            </form>
+        </tr>
+    }
+    </tbody>
+</table>

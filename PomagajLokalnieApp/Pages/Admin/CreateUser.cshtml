@@ -1,0 +1,18 @@
+﻿@page
+@model CreateUser
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="CreateUserViewModel.Login"></label>
+        <input class="form-control" asp-for="CreateUserViewModel.Login">
+    </div>
+    <div class="form-group">
+            <label asp-for="CreateUserViewModel.Roles"></label>
+            <input class="form-control" asp-for="CreateUserViewModel.Roles">
+        </div>
+    <div class="form-group">
+        <label asp-for="CreateUserViewModel.Password"></label>
+        <input class="form-control" asp-for="CreateUserViewModel.Password">
+    </div>
+    <button class="btn btn-primary">Utwórz</button>
+</form>
