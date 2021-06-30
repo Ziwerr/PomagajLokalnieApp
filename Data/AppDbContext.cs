@@ -23,5 +23,13 @@ namespace Data
             return base.SaveChangesAsync();
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .HasData(
+                    new User {Id = 1, Login = "Admin", Password = "Admin", Roles = "Admin", AccountBalance = 1000},
+                    new User {Id = 2, Login = "Company", Password = "Company", Roles = "Company", AccountBalance = 1000},
+                    new User {Id = 3, Login = "Client", Password = "Client", Roles = "Client", AccountBalance = 1000});
+        }
     }
 }
