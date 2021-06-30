@@ -11,15 +11,13 @@ using Services.Anonymous;
 
 namespace PomagajLokalnieApp.Pages.Anonymous
 {
-    public class Login : PageModel
+    public class Index : PageModel
     {
         private readonly IAnonymousService _service;
-        private readonly IMapper _mapper;
 
-        public Login(IAnonymousService service, IMapper mapper)
+        public Index(IAnonymousService service)
         {
             _service = service;
-            _mapper = mapper;
         }
         
         public void OnGet()
@@ -46,13 +44,13 @@ namespace PomagajLokalnieApp.Pages.Anonymous
                 }
                 return RedirectToPage("/Client/IndexOfferForClient");
             }
-            return RedirectToPage("Login");
+            return RedirectToPage("Index");
         }
         
         public async Task<IActionResult> OnPostLogoutAsync()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToPage("Login");
+            return RedirectToPage("Index");
         }
         
         public static ClaimsPrincipal GetPrincipal(User user)

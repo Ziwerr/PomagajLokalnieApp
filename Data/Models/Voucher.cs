@@ -12,6 +12,8 @@ namespace Data.Models
         public int OfferId { get; set; }
         public decimal StartAmount { get; set; }
         public decimal CurrentAmount { get; set; }
-        public DateTime ExpirationDate { get; set; }  
+        public DateTime ExpirationDate { get; set; }
+        [ForeignKey("User")] 
+        public int UserId { get; set; }
     }
 }

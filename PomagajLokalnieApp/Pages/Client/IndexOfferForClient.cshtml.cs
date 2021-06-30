@@ -2,9 +2,11 @@
 using System.Linq;
 using System.Net;
 using AutoMapper;
+using Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using PomagajLokalnieApp.Pages.Businessman.ViewModel;
 using Services.Client;
 
@@ -27,12 +29,14 @@ namespace PomagajLokalnieApp.Pages.Client
 
         [BindProperty]
         public decimal Ammount { get; set; }
+
+        public ICollection<Voucher> VoucherAmmount { get; set; }
         
-        [HttpGet]
         public void OnGet()
         {
             var offers = _clientService.GetOffers().ToList();
             Ammount = _clientService.GetUser(HttpContext.User.Identity?.Name).AccountBalance;
+            VoucherAmmount = _clientService.GetVoucher(HttpContext.User.Identity.Name).ToList();
             foreach (var offer in offers)
             { 
                 var offerTypeName = _clientService.GetOfferTypeName(offer.OfferTypeId);
@@ -49,7 +53,6 @@ namespace PomagajLokalnieApp.Pages.Client
             }
         }
         
-        [HttpPost]
         public IActionResult OnPostBuy(string name, int id)
         {
             _clientService.BuyOffer(name, id);

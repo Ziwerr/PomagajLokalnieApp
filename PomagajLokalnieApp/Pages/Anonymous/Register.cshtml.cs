@@ -30,7 +30,7 @@ namespace PomagajLokalnieApp.Pages.Anonymous
         public async Task<IActionResult> OnPost()
         {
             await _anonymousService.Register(RegisterDto);
-            return RedirectToPage("Login");
+            return RedirectToPage("Index");
         }
     }
 }

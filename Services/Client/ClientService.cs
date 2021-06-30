@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Data;
 using Data.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Services.Client
 {
@@ -18,7 +20,7 @@ namespace Services.Client
             return _dbContext.Offers.AsQueryable().Where(x=>x.SoftDelete==false);
         }
         
-        public IQueryable<OfferType> GetOfferTypes()
+        private IQueryable<OfferType> GetOfferTypes()
         {
             return _dbContext.OfferTypes.AsQueryable();
         }
@@ -37,13 +39,28 @@ namespace Services.Client
         {
             var user = _dbContext.Users.FirstOrDefault(x => x.Login == name);
             var offer = _dbContext.Offers.FirstOrDefault(x => x.Id == offerId);
-
+                
             if (user.AccountBalance >= offer.Price)
             {
                 user.AccountBalance -= offer.Price;
                 offer.SoftDelete = true;
+                var voucher = new Voucher()
+                {
+                    ExpirationDate = DateTime.Now.AddDays(90),
+                    CurrentAmount = offer.Price,
+                    StartAmount = offer.Price,
+                    OfferId = offerId
+                };
+                
+                _dbContext.Vouchers.Add(voucher);
                 _dbContext.SaveChangesAsync();
             }
         }
+
+        public IQueryable<Voucher> GetVoucher(string name)
+        {
+           return _dbContext.Vouchers.AsQueryable();
+        }
+        
     }
 }

@@ -52,7 +52,7 @@
                     @if (!User.Identity.IsAuthenticated)
                     {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Anonymous/Login">Login</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Anonymous/Index">Login</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Anonymous/Register">Register</a>
@@ -60,7 +60,7 @@
                     }
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <form method="post" asp-page="/Anonymous/Login" asp-page-handler="Logout">
+                        <form method="post" asp-page="/Anonymous/Index" asp-page-handler="Logout">
                             <li class="nav-item">
                                 <button type="submit" class="btn btn-link">Logout</button>
                             </li>
